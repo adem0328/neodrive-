@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoDrive | Smart V2X Vehicle of the Future</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0EA5E9;
+            --secondary: #8B5CF6;
+            --accent: #F59E0B;
+            --dark: #0F172A;
+            --darker: #020617;
+            --light: #F8FAFC;
+            --gray: #64748B;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .bg-modern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 0% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 5rem;
+            position: relative;
+        }
+
+        .hero-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            border-radius: 100px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FFFFFF, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 500px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.4);
+        }
+
+        .cta-button::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover::after {
+            transform: translateX(4px);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .car-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .car {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(0px) translateX(20px); }
+            75% { transform: translateY(-15px) translateX(10px); }
+        }
+
+        .modern-car {
+            width: 600px;
+            height: auto;
+            filter: drop-shadow(0 30px 60px rgba(14, 165, 233, 0.3));
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: particle-float 4s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        .particle:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(3) {
+            top: 80%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(4) {
+            top: 40%;
+            right: 10%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes particle-float {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translateY(-50px) scale(1.5);
+                opacity: 1;
+            }
+        }
+
+        .energy-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: pulse-ring 3s ease-out infinite;
+        }
+
+        .energy-ring:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            animation-delay: 0s;
+        }
+
+        .energy-ring:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            animation-delay: 1s;
+        }
+
+        .energy-ring:nth-child(3) {
+            width: 600px;
+            height: 600px;
+            animation-delay: 2s;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        section {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 100px;
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 3rem;
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(14, 165, 233, 0.3);
+            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(139, 92, 246, 0.2));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .guide {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(139, 92, 246, 0.05));
+        }
+
+        .guide-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .guide-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            position: relative;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: pulse-border 2s ease-out infinite;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        .guide-step h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .guide-step p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .tech-specs {
+            background: rgba(15, 23, 42, 0.3);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .spec-category {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 3rem;
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .spec-category h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .spec-category h3 .icon {
+            font-size: 2rem;
+        }
+
+        .spec-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(14, 165, 233, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .spec-item strong {
+            color: var(--light);
+            min-width: 140px;
+            font-weight: 600;
+        }
+
+        .spec-item span {
+            color: var(--gray);
+        }
+
+        footer {
+            background: var(--darker);
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        footer .logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .modern-car {
+                width: 500px;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .modern-car {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .features-grid,
+            .guide-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-modern"></div>
+
+    <nav>
+        <div class="container">
+            <div class="logo">NEODRIVE</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#guide">User Guide</a></li>
+                <li><a href="#specs">Specs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-label">The Future is Here</div>
+                <h1>NeoDrive</h1>
+                <p class="hero-description">
+                    An intelligent mobility ecosystem that learns, anticipates, and communicates. 
+                    Experience the next generation of smart vehicles with V2X technology.
+                </p>
+                <a href="#features" class="cta-button">Explore Features</a>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="car-container">
+                    <div class="energy-ring"></div>
+                    <div class="energy-ring"></div>
+                    <div class="energy-ring"></div>
+                    
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    
+                    <div class="car">
+                        <svg class="modern-car" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="carGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0EA5E9;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            
+                            <ellipse cx="300" cy="270" rx="220" ry="15" fill="rgba(14, 165, 233, 0.2)" opacity="0.5"/>
+                            
+                            <path d="M 120 180 L 150 140 L 200 120 L 400 120 L 450 140 L 480 180 L 480 220 L 120 220 Z" 
+                                  fill="url(#carGradient)" 
+                                  filter="url(#glow)" 
+                                  opacity="0.9"/>
+                            
+                            <path d="M 180 120 L 200 100 L 400 100 L 420 120 Z" 
+                                  fill="rgba(15, 23, 42, 0.8)" 
+                                  stroke="#0EA5E9" 
+                                  stroke-width="2"/>
+                            
+                            <path d="M 210 105 L 220 115 L 290 115 L 290 105 Z" 
+                                  fill="rgba(14, 165, 233, 0.3)" 
+                                  stroke="#0EA5E9" 
+                                  stroke-width="1.5"/>
+                            <path d="M 310 105 L 310 115 L 380 115 L 390 105 Z" 
+                                  fill="rgba(14, 165, 233, 0.3)" 
+                                  stroke="#0EA5E9" 
+                                  stroke-width="1.5"/>
+                            
+                            <circle cx="130" cy="160" r="12" fill="#0EA5E9" opacity="0.9" filter="url(#glow)">
+                                <animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="130" cy="190" r="10" fill="#0EA5E9" opacity="0.7" filter="url(#glow)">
+                                <animate attributeName="opacity" values="0.7;0.9;0.7" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            
+                            <rect x="470" y="155" width="8" height="25" rx="4" fill="#8B5CF6" opacity="0.8">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="470" y="185" width="8" height="25" rx="4" fill="#8B5CF6" opacity="0.8">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+                            </rect>
+                            
+                            <g>
+                                <circle cx="180" cy="230" r="35" fill="rgba(15, 23, 42, 0.9)" stroke="#0EA5E9" stroke-width="3"/>
+                                <circle cx="180" cy="230" r="25" fill="rgba(14, 165, 233, 0.2)" stroke="#0EA5E9" stroke-width="2">
+                                    <animateTransform attributeName="transform" type="rotate" from="0 180 230" to="360 180 230" dur="3s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="180" cy="230" r="8" fill="#0EA5E9"/>
+                                
+                                <circle cx="420" cy="230" r="35" fill="rgba(15, 23, 42, 0.9)" stroke="#0EA5E9" stroke-width="3"/>
+                                <circle cx="420" cy="230" r="25" fill="rgba(14, 165, 233, 0.2)" stroke="#0EA5E9" stroke-width="2">
+                                    <animateTransform attributeName="transform" type="rotate" from="0 420 230" to="360 420 230" dur="3s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="420" cy="230" r="8" fill="#0EA5E9"/>
+                            </g>
+                            
+                            <line x1="300" y1="120" x2="300" y2="220" stroke="rgba(14, 165, 233, 0.3)" stroke-width="2"/>
+                            
+                            <ellipse cx="195" cy="130" rx="8" ry="5" fill="rgba(14, 165, 233, 0.4)" stroke="#0EA5E9" stroke-width="1"/>
+                            
+                            <g opacity="0.6">
+                                <path d="M 300 80 Q 320 60, 340 80" stroke="#0EA5E9" stroke-width="2" fill="none">
+                                    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M 290 70 Q 320 40, 350 70" stroke="#0EA5E9" stroke-width="2" fill="none">
+                                    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M 280 60 Q 320 20, 360 60" stroke="#0EA5E9" stroke-width="2" fill="none">
+                                    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1s" repeatCount="indefinite"/>
+                                </path>
+                            </g>
+                            
+                            <g transform="translate(280, 160)">
+                                <circle r="15" fill="rgba(245, 158, 11, 0.2)" stroke="#F59E0B" stroke-width="2"/>
+                                <path d="M 0 -8 L -4 2 L 2 2 L 0 8 L 4 -2 L -2 -2 Z" fill="#F59E0B">
+                                    <animateTransform attributeName="transform" type="scale" values="1;1.2;1" dur="1.5s" repeatCount="indefinite"/>
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Core Features</div>
+                <h2 class="section-title">Intelligence Redefined</h2>
+                <p class="section-description">
+                    Five revolutionary systems working in perfect harmony to transform your driving experience.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>AI Predictive Safety</h3>
+                    <p>
+                        Advanced vision AI detects invisible threats before they become dangers. 
+                        Learns from every near-miss to protect you proactively with 360° awareness.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Smart Energy Optimization</h3>
+                    <p>
+                        Personalized routing that adapts to your driving style. 
+                        Minimize braking, maximize battery efficiency with AI-powered predictive paths.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌐</div>
+                    <h3>V2X Communication Network</h3>
+                    <p>
+                        Real-time vehicle-to-everything connectivity. 
+                        Share road hazards, coordinate with traffic, and enable emergency vehicle priority automatically.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Emotion-Aware Cabin</h3>
+                    <p>
+                        Interior AI analyzes your emotional state and adapts the environment. 
+                        Automatic adjustments to lighting, climate, and interface based on your mood.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔋</div>
+                    <h3>Cooperative Energy Sharing</h3>
+                    <p>
+                        Vehicle-to-vehicle energy transfer in emergencies. 
+                        Solar-powered AI systems and cooperative charging network between NeoDrive vehicles.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📡</div>
+                    <h3>Ghost Risk Memory</h3>
+                    <p>
+                        AI remembers dangerous locations and risky behavior patterns. 
+                        Provides location-based warnings and learns from historical near-miss data.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="guide" class="guide">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Getting Started</div>
+                <h2 class="section-title">How to Use NeoDrive</h2>
+                <p class="section-description">
+                    Your journey to intelligent mobility starts here. Follow these simple steps.
+                </p>
+            </div>
+            
+            <div class="guide-steps">
+                <div class="guide-step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Initial Setup</h3>
+                    <p>
+                        Power on NeoDrive and complete the facial recognition setup. 
+                        The system will scan and learn your profile for personalized experiences.
+                    </p>
+                </div>
+                
+                <div class="guide-step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>Calibrate Your Preferences</h3>
+                    <p>
+                        Set your driving preferences, comfort zones, and energy priorities. 
+                        NeoDrive's AI will adapt and refine these settings as it learns your habits.
+                    </p>
+                </div>
+                
+                <div class="guide-step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>Enable V2X Communication</h3>
+                    <p>
+                        Activate vehicle-to-everything connectivity to join the smart network. 
+                        Share and receive real-time road information with other vehicles.
+                    </p>
+                </div>
+                
+                <div class="guide-step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>Start Your Journey</h3>
+                    <p>
+                        Enter your destination and let NeoDrive optimize your route. 
+                        The AI will select the most energy-efficient path based on your profile.
+                    </p>
+                </div>
+                
+                <div class="guide-step fade-in">
+                    <div class="step-number">5</div>
+                    <h3>Monitor & Adapt</h3>
+                    <p>
+                        Review your energy usage, safety alerts, and trip analytics on the dashboard. 
+                        NeoDrive continuously learns and improves from every journey.
+                    </p>
+                </div>
+                
+                <div class="guide-step fade-in">
+                    <div class="step-number">6</div>
+                    <h3>Share Energy</h3>
+                    <p>
+                        When needed, connect with nearby NeoDrive vehicles for emergency energy transfer. 
+                        Help others or receive assistance through the cooperative network.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specs" class="tech-specs">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-label">Technical Details</div>
+                <h2 class="section-title">Under the Hood</h2>
+                <p class="section-description">
+                    Cutting-edge technology powering the future of mobility.
+                </p>
+            </div>
+            
+            <div class="specs-grid">
+                <div class="spec-category fade-in">
+                    <h3><span class="icon">🔧</span> Hardware</h3>
+                    <div class="spec-list">
+                        <div class="spec-item">
+                            <strong>Vision System:</strong>
+                            <span>4x 1080p cameras (360° coverage)</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Sensors:</strong>
+                            <span>LIDAR + IMU acceleration sensors</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Processor:</strong>
+                            <span>NVIDIA Jetson / Raspberry Pi 5</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Solar:</strong>
+                            <span>Integrated panel array for AI power</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="spec-category fade-in">
+                    <h3><span class="icon">📡</span> Connectivity</h3>
+                    <div class="spec-list">
+                        <div class="spec-item">
+                            <strong>Mobile:</strong>
+                            <span>5G network support</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Local:</strong>
+                            <span>Wi-Fi 6E + Bluetooth Mesh</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>V2X:</strong>
+                            <span>DSRC vehicle communication</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Protocol:</strong>
+                            <span>MQTT IoT messaging</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="spec-category fade-in">
+                    <h3><span class="icon">🤖</span> AI Software</h3>
+                    <div class="spec-list">
+                        <div class="spec-item">
+                            <strong>Vision:</strong>
+                            <span>YOLO v9 object detection</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Framework:</strong>
+                            <span>TensorFlow / PyTorch</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Emotion AI:</strong>
+                            <span>Facial recognition & analysis</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Latency:</strong>
+                            <span>&lt;30ms edge processing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="spec-category fade-in">
+                    <h3><span class="icon">🔐</span> Security</h3>
+                    <div class="spec-list">
+                        <div class="spec-item">
+                            <strong>Encryption:</strong>
+                            <span>End-to-end V2X security</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Privacy:</strong>
+                            <span>Anonymized data processing</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Protection:</strong>
+                            <span>Embedded firewall system</span>
+                        </div>
+                        <div class="spec-item">
+                            <strong>Boot:</strong>
+                            <span>Secure boot protocol</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo">NEODRIVE</div>
+            <p>Intelligent mobility for a sustainable future</p>
+            <p style="margin-top: 2rem; opacity: 0.5;">© 2025 NeoDrive. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.style.color = 'var(--primary)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
